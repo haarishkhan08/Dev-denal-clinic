@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dev Dental Clinic – Orthodontic Centre & Implant Services | Badarpur, New Delhi</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue: #1a5fa8;
+    --blue-dark: #0f3d6e;
+    --blue-light: #e8f1fb;
+    --green: #3ab07a;
+    --green-light: #e6f7f0;
+    --white: #ffffff;
+    --off-white: #f7fafd;
+    --text: #1c2b3a;
+    --text-muted: #6b7f94;
+    --border: #dce8f5;
+    --shadow: 0 4px 32px rgba(26,95,168,0.10);
+    --radius: 16px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    background: var(--white);
+    overflow-x: hidden;
+  }
+
+  /* ───────────────────── NAV ───────────────────── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    background: rgba(255,255,255,0.96);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 5%;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 68px;
+    transition: box-shadow .3s;
+  }
+  nav.scrolled { box-shadow: 0 2px 24px rgba(26,95,168,0.12); }
+  .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .nav-logo-icon {
+    width: 44px; height: 44px; background: linear-gradient(135deg, var(--blue), var(--green));
+    border-radius: 12px; display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+  }
+  .nav-logo-text h1 { font-family: 'Playfair Display', serif; font-size: 17px; color: var(--blue-dark); line-height: 1.2; }
+  .nav-logo-text p { font-size: 10.5px; color: var(--text-muted); font-weight: 500; letter-spacing: .3px; }
+  .nav-links { display: flex; align-items: center; gap: 28px; }
+  .nav-links a { text-decoration: none; color: var(--text); font-size: 14px; font-weight: 500; transition: color .2s; }
+  .nav-links a:hover { color: var(--blue); }
+  .nav-cta {
+    background: linear-gradient(135deg, var(--blue), var(--blue-dark));
+    color: #fff; border: none; padding: 10px 22px; border-radius: 30px;
+    font-size: 14px; font-weight: 600; cursor: pointer; text-decoration: none;
+    transition: transform .2s, box-shadow .2s;
+  }
+  .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(26,95,168,0.35); }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+  .hamburger span { display: block; width: 24px; height: 2px; background: var(--text); border-radius: 2px; transition: .3s; }
+  .mobile-menu {
+    display: none; position: fixed; top: 68px; left: 0; right: 0; bottom: 0;
+    background: rgba(255,255,255,0.99); z-index: 999; flex-direction: column;
+    align-items: center; justify-content: center; gap: 32px;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a { font-size: 20px; font-weight: 600; color: var(--text); text-decoration: none; }
+  .mobile-menu a:hover { color: var(--blue); }
+
+  /* ───────────────────── HERO ───────────────────── */
+  #home {
+    min-height: 100vh; position: relative; overflow: hidden;
+    display: flex; align-items: center;
+    background: linear-gradient(160deg, #e8f2fc 0%, #f0faf5 55%, #edf5fb 100%);
+  }
+  .hero-bg-circle {
+    position: absolute; border-radius: 50%;
+    background: radial-gradient(circle, rgba(26,95,168,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-bg-circle.c1 { width: 600px; height: 600px; top: -100px; right: -100px; }
+  .hero-bg-circle.c2 { width: 400px; height: 400px; bottom: -80px; left: -80px; background: radial-gradient(circle, rgba(58,176,122,0.10) 0%, transparent 70%); }
+  .hero-container {
+    max-width: 1200px; margin: 0 auto; padding: 120px 5% 80px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--white); border: 1px solid var(--border);
+    padding: 8px 16px; border-radius: 30px; font-size: 13px; font-weight: 500;
+    color: var(--green); margin-bottom: 24px; box-shadow: 0 2px 12px rgba(58,176,122,.12);
+  }
+  .hero-badge .dot { width: 8px; height: 8px; background: var(--green); border-radius: 50%; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(1.3)} }
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 5vw, 58px); line-height: 1.15;
+    color: var(--blue-dark); margin-bottom: 10px;
+  }
+  .hero-title span { color: var(--blue); }
+  .hero-subtitle {
+    font-size: 15px; font-weight: 600; color: var(--green);
+    letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 18px;
+  }
+  .hero-tagline { font-size: 18px; color: var(--text-muted); line-height: 1.6; margin-bottom: 36px; max-width: 460px; }
+  .hero-buttons { display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--blue), var(--blue-dark));
+    color: #fff; padding: 14px 28px; border-radius: 40px;
+    font-size: 15px; font-weight: 600; text-decoration: none; display: inline-flex;
+    align-items: center; gap: 8px; transition: transform .2s, box-shadow .2s;
+    box-shadow: 0 6px 24px rgba(26,95,168,0.30);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 32px rgba(26,95,168,0.40); }
+  .btn-secondary {
+    background: var(--white); color: var(--blue); padding: 14px 28px; border-radius: 40px;
+    font-size: 15px; font-weight: 600; text-decoration: none; display: inline-flex;
+    align-items: center; gap: 8px; border: 2px solid var(--border);
+    transition: border-color .2s, box-shadow .2s;
+  }
+  .btn-secondary:hover { border-color: var(--blue); box-shadow: var(--shadow); }
+  .hero-stats { display: flex; gap: 32px; margin-top: 44px; flex-wrap: wrap; }
+  .hero-stat h3 { font-family: 'Playfair Display', serif; font-size: 28px; color: var(--blue-dark); }
+  .hero-stat p { font-size: 13px; color: var(--text-muted); font-weight: 500; }
+  .hero-image-wrap { position: relative; }
+  .hero-card {
+    background: var(--white); border-radius: 24px; padding: 40px;
+    box-shadow: 0 24px 64px rgba(26,95,168,0.14);
+    border: 1px solid var(--border); position: relative; overflow: hidden;
+  }
+  .hero-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+    background: linear-gradient(90deg, var(--blue), var(--green));
+  }
+  .hero-card-icon { font-size: 64px; margin-bottom: 20px; display: block; }
+  .hero-card h3 { font-family: 'Playfair Display', serif; font-size: 22px; margin-bottom: 12px; color: var(--blue-dark); }
+  .hero-card p { font-size: 14px; color: var(--text-muted); line-height: 1.7; }
+  .hero-floating {
+    position: absolute; background: var(--white); border-radius: 14px;
+    padding: 12px 18px; box-shadow: 0 8px 32px rgba(26,95,168,0.15);
+    border: 1px solid var(--border); font-size: 13px; font-weight: 600;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .hero-floating.f1 { top: -20px; right: -20px; }
+  .hero-floating.f2 { bottom: 20px; left: -30px; }
+  .hero-floating .fi { font-size: 20px; }
+  .hero-floating .ft { color: var(--text-muted); font-size: 11px; font-weight: 400; }
+
+  /* ───────────────────── SECTIONS ───────────────────── */
+  section { padding: 90px 5%; }
+  .section-tag {
+    display: inline-block; background: var(--blue-light); color: var(--blue);
+    font-size: 12px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+    padding: 6px 16px; border-radius: 20px; margin-bottom: 16px;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif; font-size: clamp(28px, 3.5vw, 42px);
+    color: var(--blue-dark); line-height: 1.2; margin-bottom: 14px;
+  }
+  .section-desc { font-size: 16px; color: var(--text-muted); line-height: 1.7; max-width: 560px; }
+  .centered { text-align: center; }
+  .centered .section-desc { margin: 0 auto; }
+
+  /* ───────────────────── ABOUT ───────────────────── */
+  #about { background: var(--off-white); }
+  .about-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+  .about-visual {
+    background: linear-gradient(135deg, var(--blue-light), var(--green-light));
+    border-radius: 24px; padding: 50px; text-align: center;
+    border: 1px solid var(--border); position: relative; overflow: hidden;
+  }
+  .about-visual::after {
+    content: ''; position: absolute; bottom: -40px; right: -40px;
+    width: 180px; height: 180px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(58,176,122,0.15), transparent 70%);
+  }
+  .about-visual-emoji { font-size: 80px; margin-bottom: 20px; display: block; }
+  .about-visual h3 { font-family: 'Playfair Display', serif; font-size: 22px; color: var(--blue-dark); margin-bottom: 8px; }
+  .about-visual p { font-size: 14px; color: var(--text-muted); }
+  .about-chips { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; justify-content: center; }
+  .chip {
+    background: var(--white); border: 1px solid var(--border);
+    padding: 8px 16px; border-radius: 20px; font-size: 13px; font-weight: 500; color: var(--blue-dark);
+  }
+  .about-content .section-desc { max-width: 100%; margin-bottom: 28px; }
+  .about-points { display: flex; flex-direction: column; gap: 16px; margin-top: 24px; }
+  .about-point {
+    display: flex; gap: 14px; align-items: flex-start;
+    background: var(--white); padding: 18px 20px; border-radius: 14px; border: 1px solid var(--border);
+  }
+  .about-point-icon { font-size: 24px; flex-shrink: 0; margin-top: 2px; }
+  .about-point h4 { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+  .about-point p { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
+
+  /* ───────────────────── SERVICES ───────────────────── */
+  #services { background: var(--white); }
+  .services-inner { max-width: 1200px; margin: 0 auto; }
+  .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; margin-top: 48px; }
+  .service-card {
+    background: var(--white); border: 1.5px solid var(--border);
+    border-radius: var(--radius); padding: 32px 24px;
+    transition: transform .25s, box-shadow .25s, border-color .25s;
+    position: relative; overflow: hidden; cursor: default;
+  }
+  .service-card::before {
+    content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--blue), var(--green)); transform: scaleX(0);
+    transition: transform .3s; transform-origin: left;
+  }
+  .service-card:hover { transform: translateY(-6px); box-shadow: 0 16px 48px rgba(26,95,168,0.14); border-color: var(--blue); }
+  .service-card:hover::before { transform: scaleX(1); }
+  .service-icon {
+    width: 56px; height: 56px; border-radius: 14px; margin-bottom: 20px;
+    display: flex; align-items: center; justify-content: center; font-size: 26px;
+    background: var(--blue-light);
+  }
+  .service-card:nth-child(2) .service-icon { background: var(--green-light); }
+  .service-card:nth-child(3) .service-icon { background: #fff3e6; }
+  .service-card:nth-child(4) .service-icon { background: #f0e8ff; }
+  .service-card:nth-child(5) .service-icon { background: #ffe8ed; }
+  .service-card h3 { font-family: 'Playfair Display', serif; font-size: 18px; margin-bottom: 10px; color: var(--blue-dark); }
+  .service-card p { font-size: 13.5px; color: var(--text-muted); line-height: 1.7; }
+
+  /* ───────────────────── WHY US ───────────────────── */
+  #why { background: linear-gradient(160deg, var(--blue-dark) 0%, #0d4a85 100%); }
+  .why-inner { max-width: 1200px; margin: 0 auto; }
+  .why-inner .section-tag { background: rgba(255,255,255,0.12); color: #a8d4f5; }
+  .why-inner .section-title { color: #fff; }
+  .why-inner .section-desc { color: rgba(255,255,255,0.70); }
+  .why-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; margin-top: 48px; }
+  .why-card {
+    background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+    border-radius: var(--radius); padding: 32px 26px;
+    transition: background .25s, transform .25s;
+    backdrop-filter: blur(6px);
+  }
+  .why-card:hover { background: rgba(255,255,255,0.14); transform: translateY(-4px); }
+  .why-card-num { font-family: 'Playfair Display', serif; font-size: 42px; font-weight: 700; color: rgba(255,255,255,0.15); line-height: 1; margin-bottom: 12px; }
+  .why-card-icon { font-size: 36px; margin-bottom: 16px; display: block; }
+  .why-card h3 { font-size: 17px; font-weight: 600; color: #fff; margin-bottom: 10px; }
+  .why-card p { font-size: 13.5px; color: rgba(255,255,255,.65); line-height: 1.7; }
+
+  /* ───────────────────── TESTIMONIALS ───────────────────── */
+  #testimonials { background: var(--off-white); }
+  .testi-inner { max-width: 1200px; margin: 0 auto; }
+  .testi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; margin-top: 48px; }
+  .testi-card {
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 28px 24px;
+    box-shadow: var(--shadow); position: relative;
+  }
+  .testi-card::before {
+    content: '"'; font-family: 'Playfair Display', serif; font-size: 80px;
+    color: var(--blue-light); line-height: 1; position: absolute; top: 12px; right: 20px;
+  }
+  .testi-stars { color: #f5a623; font-size: 16px; margin-bottom: 14px; letter-spacing: 2px; }
+  .testi-card p { font-size: 14px; color: var(--text-muted); line-height: 1.75; margin-bottom: 20px; font-style: italic; }
+  .testi-author { display: flex; align-items: center; gap: 12px; }
+  .testi-avatar {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--blue), var(--green));
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-weight: 700; font-size: 16px; flex-shrink: 0;
+  }
+  .testi-author h4 { font-size: 14px; font-weight: 600; }
+  .testi-author p { font-size: 12px; color: var(--text-muted); font-style: normal; margin: 0; }
+
+  /* ───────────────────── APPOINTMENT ───────────────────── */
+  #appointment { background: var(--white); }
+  .appt-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+  .appt-form-wrap { background: var(--off-white); border-radius: 24px; padding: 40px; border: 1px solid var(--border); }
+  .appt-form-wrap h3 { font-family: 'Playfair Display', serif; font-size: 24px; color: var(--blue-dark); margin-bottom: 6px; }
+  .appt-form-wrap p { font-size: 14px; color: var(--text-muted); margin-bottom: 28px; }
+  .form-group { margin-bottom: 18px; }
+  .form-group label { display: block; font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 7px; }
+  .form-group input, .form-group textarea, .form-group select {
+    width: 100%; padding: 12px 16px; border-radius: 10px;
+    border: 1.5px solid var(--border); font-family: 'DM Sans', sans-serif;
+    font-size: 14px; color: var(--text); background: var(--white);
+    transition: border-color .2s, box-shadow .2s; outline: none;
+    -webkit-appearance: none;
+  }
+  .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+    border-color: var(--blue); box-shadow: 0 0 0 3px rgba(26,95,168,0.10);
+  }
+  .form-group textarea { resize: vertical; min-height: 110px; }
+  .form-submit {
+    width: 100%; background: linear-gradient(135deg, var(--blue), var(--blue-dark));
+    color: #fff; border: none; padding: 14px; border-radius: 40px;
+    font-size: 15px; font-weight: 600; cursor: pointer; transition: transform .2s, box-shadow .2s;
+    font-family: 'DM Sans', sans-serif; display: flex; align-items: center; justify-content: center; gap: 8px;
+  }
+  .form-submit:hover { transform: translateY(-1px); box-shadow: 0 8px 28px rgba(26,95,168,0.35); }
+  .whatsapp-btn {
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    background: #25D366; color: #fff; padding: 14px 24px;
+    border-radius: 40px; font-size: 15px; font-weight: 600; text-decoration: none;
+    margin-top: 14px; transition: transform .2s, box-shadow .2s;
+    box-shadow: 0 4px 16px rgba(37,211,102,0.28);
+  }
+  .whatsapp-btn:hover { transform: translateY(-1px); box-shadow: 0 8px 28px rgba(37,211,102,0.38); }
+  .appt-info h3 { font-family: 'Playfair Display', serif; font-size: 28px; color: var(--blue-dark); margin-bottom: 8px; }
+  .appt-info > p { font-size: 15px; color: var(--text-muted); margin-bottom: 32px; line-height: 1.7; }
+  .info-cards { display: flex; flex-direction: column; gap: 16px; }
+  .info-card {
+    display: flex; gap: 16px; align-items: flex-start;
+    background: var(--off-white); padding: 20px; border-radius: 14px; border: 1px solid var(--border);
+  }
+  .info-card-icon { font-size: 26px; flex-shrink: 0; }
+  .info-card h4 { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+  .info-card p { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
+
+  /* ───────────────────── MAP ───────────────────── */
+  #location { background: var(--off-white); }
+  .map-inner { max-width: 1200px; margin: 0 auto; }
+  .map-container { margin-top: 40px; border-radius: 20px; overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow); }
+  .map-container iframe { width: 100%; height: 420px; display: block; border: none; }
+
+  /* ───────────────────── CONTACT ───────────────────── */
+  #contact { background: var(--white); }
+  .contact-inner { max-width: 1200px; margin: 0 auto; }
+  .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; margin-top: 48px; }
+  .contact-card {
+    background: var(--off-white); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 30px 24px; text-align: center;
+    transition: transform .25s, box-shadow .25s;
+  }
+  .contact-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+  .contact-card-icon { font-size: 40px; margin-bottom: 16px; display: block; }
+  .contact-card h3 { font-size: 15px; font-weight: 700; color: var(--blue-dark); margin-bottom: 8px; }
+  .contact-card p { font-size: 13.5px; color: var(--text-muted); line-height: 1.7; }
+  .contact-card a { color: var(--blue); text-decoration: none; font-weight: 600; }
+  .contact-card a:hover { text-decoration: underline; }
+
+  /* ───────────────────── FOOTER ───────────────────── */
+  footer {
+    background: var(--blue-dark); color: rgba(255,255,255,0.75);
+    padding: 32px 5%; text-align: center; font-size: 13px; line-height: 1.8;
+  }
+  footer strong { color: #fff; }
+  .footer-demo {
+    display: inline-block; margin-top: 8px;
+    background: rgba(255,255,255,0.10); padding: 6px 20px; border-radius: 20px;
+    font-size: 12px; color: rgba(255,255,255,0.55); border: 1px solid rgba(255,255,255,0.15);
+  }
+
+  /* ───────────────────── FLOATING WA ───────────────────── */
+  .float-wa {
+    position: fixed; bottom: 28px; right: 28px; z-index: 900;
+    background: #25D366; color: #fff; width: 56px; height: 56px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; font-size: 28px;
+    box-shadow: 0 6px 24px rgba(37,211,102,0.4); text-decoration: none;
+    transition: transform .2s; animation: float 3s ease-in-out infinite;
+  }
+  .float-wa:hover { transform: scale(1.1); }
+  @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
+
+  /* ───────────────────── DIVIDERS ───────────────────── */
+  .divider { width: 60px; height: 4px; border-radius: 2px; background: linear-gradient(90deg, var(--blue), var(--green)); margin: 18px 0 24px; }
+  .divider.center { margin-left: auto; margin-right: auto; }
+
+  /* ───────────────────── RESPONSIVE ───────────────────── */
+  @media(max-width:900px){
+    .hero-container { grid-template-columns: 1fr; gap: 40px; }
+    .hero-image-wrap { order: -1; }
+    .about-grid { grid-template-columns: 1fr; }
+    .appt-inner { grid-template-columns: 1fr; }
+  }
+  @media(max-width:700px){
+    .nav-links, .nav-cta { display: none; }
+    .hamburger { display: flex; }
+    .hero-buttons { flex-direction: column; }
+    .hero-stats { gap: 24px; }
+    section { padding: 64px 5%; }
+    .hero-floating.f1, .hero-floating.f2 { display: none; }
+  }
+
+  /* ─── Scroll Animations ─── */
+  .fade-up { opacity: 0; transform: translateY(30px); transition: opacity .6s ease, transform .6s ease; }
+  .fade-up.visible { opacity: 1; transform: none; }
+
+  /* success message */
+  .success-msg {
+    display: none; background: var(--green-light); border: 1px solid var(--green);
+    color: #1a6645; padding: 14px 18px; border-radius: 10px; font-size: 14px;
+    font-weight: 500; margin-top: 12px; text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#home" class="nav-logo">
+    <div class="nav-logo-icon">🦷</div>
+    <div class="nav-logo-text">
+      <h1>Dev Dental Clinic</h1>
+      <p>Orthodontic Centre & Implant Services</p>
+    </div>
+  </a>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#why">Why Us</a>
+    <a href="#testimonials">Reviews</a>
+    <a href="#contact">Contact</a>
+    <a href="#appointment" class="nav-cta">Book Appointment</a>
+  </div>
+  <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about" onclick="toggleMenu()">About</a>
+  <a href="#services" onclick="toggleMenu()">Services</a>
+  <a href="#why" onclick="toggleMenu()">Why Us</a>
+  <a href="#testimonials" onclick="toggleMenu()">Reviews</a>
+  <a href="#appointment" onclick="toggleMenu()">Book Appointment</a>
+  <a href="#contact" onclick="toggleMenu()">Contact</a>
+</div>
+
+<!-- HERO -->
+<section id="home">
+  <div class="hero-bg-circle c1"></div>
+  <div class="hero-bg-circle c2"></div>
+  <div class="hero-container">
+    <div class="hero-content">
+      <div class="hero-badge"><span class="dot"></span> Trusted in Badarpur, New Delhi</div>
+      <p class="hero-subtitle">Orthodontic Centre & Implant Services</p>
+      <h1 class="hero-title">Dev <span>Dental</span><br>Clinic</h1>
+      <p class="hero-tagline">Advanced Dental Care for a Healthy Smile — bringing world-class orthodontic and implant expertise to your doorstep.</p>
+      <div class="hero-buttons">
+        <a href="#appointment" class="btn-primary">📅 Book Appointment</a>
+        <a href="tel:+919891083958" class="btn-secondary">📞 Call Now</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><h3>5000+</h3><p>Happy Patients</p></div>
+        <div class="hero-stat"><h3>12+</h3><p>Years Experience</p></div>
+        <div class="hero-stat"><h3>9 AM–9 PM</h3><p>Open Daily</p></div>
+      </div>
+    </div>
+    <div class="hero-image-wrap">
+      <div class="hero-card">
+        <span class="hero-card-icon">🦷</span>
+        <h3>Expert Orthodontic &amp; Implant Care</h3>
+        <p>Modern dental treatments using advanced equipment. Comfortable, affordable, and trusted by thousands of patients across Badarpur and South Delhi.</p>
+        <div class="about-chips" style="margin-top:20px">
+          <span class="chip">✅ Implants</span>
+          <span class="chip">✅ Braces</span>
+          <span class="chip">✅ Root Canal</span>
+          <span class="chip">✅ Cosmetic</span>
+        </div>
+      </div>
+      <div class="hero-floating f1">
+        <span class="fi">⭐</span>
+        <div><strong>4.9/5 Rating</strong><br><span class="ft">Google Reviews</span></div>
+      </div>
+      <div class="hero-floating f2">
+        <span class="fi">🏥</span>
+        <div><strong>Open Daily</strong><br><span class="ft">9 AM – 9 PM</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid fade-up">
+    <div class="about-visual">
+      <span class="about-visual-emoji">🏥</span>
+      <h3>Dev Dental Clinic</h3>
+      <p>Orthodontic Centre & Implant Services<br>Badarpur, New Delhi</p>
+      <div class="about-chips">
+        <span class="chip">🦷 Expert Dentists</span>
+        <span class="chip">💡 Modern Tech</span>
+        <span class="chip">❤️ Patient First</span>
+        <span class="chip">💰 Affordable</span>
+      </div>
+    </div>
+    <div class="about-content">
+      <span class="section-tag">About Us</span>
+      <h2 class="section-title">Your Smile is Our Priority</h2>
+      <div class="divider"></div>
+      <p class="section-desc">Dev Dental Clinic is a leading dental practice in Badarpur, New Delhi — specialising in orthodontics and dental implants. We combine clinical excellence with compassionate patient care to deliver lasting, confident smiles.</p>
+      <div class="about-points">
+        <div class="about-point">
+          <span class="about-point-icon">🦷</span>
+          <div><h4>Orthodontic Specialists</h4><p>From traditional braces to clear aligners, our orthodontic treatments are tailored to give you a perfectly aligned smile.</p></div>
+        </div>
+        <div class="about-point">
+          <span class="about-point-icon">🔩</span>
+          <div><h4>Implant Expertise</h4><p>Permanent, natural-looking dental implants placed by experienced specialists using the latest implant systems.</p></div>
+        </div>
+        <div class="about-point">
+          <span class="about-point-icon">🏡</span>
+          <div><h4>Serving Badarpur & Nearby Areas</h4><p>Conveniently located at Jaitapur Mod, we proudly serve patients from Badarpur, Faridabad, Sarita Vihar, and surrounding localities.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="services-inner">
+    <div class="centered fade-up">
+      <span class="section-tag">Our Services</span>
+      <h2 class="section-title">Comprehensive Dental Treatments</h2>
+      <div class="divider center"></div>
+      <p class="section-desc">We offer a full range of dental services under one roof — from routine hygiene to advanced orthodontic and implant procedures.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card fade-up">
+        <div class="service-icon">🧹</div>
+        <h3>Teeth Cleaning</h3>
+        <p>Professional scaling and polishing to remove plaque, tartar, and stains — keeping your gums healthy and your smile bright.</p>
+      </div>
+      <div class="service-card fade-up">
+        <div class="service-icon">💉</div>
+        <h3>Root Canal Treatment</h3>
+        <p>Painless, precision root canal therapy to save infected teeth and eliminate pain — restoring full function comfortably.</p>
+      </div>
+      <div class="service-card fade-up">
+        <div class="service-icon">🔩</div>
+        <h3>Dental Implants</h3>
+        <p>Permanent titanium implants that look, feel, and function exactly like natural teeth — the gold standard in tooth replacement.</p>
+      </div>
+      <div class="service-card fade-up">
+        <div class="service-icon">😬</div>
+        <h3>Braces / Orthodontics</h3>
+        <p>Metal braces, ceramic braces, and clear aligners for children, teens, and adults — perfectly aligned teeth for life.</p>
+      </div>
+      <div class="service-card fade-up">
+        <div class="service-icon">✨</div>
+        <h3>Cosmetic Dentistry</h3>
+        <p>Teeth whitening, veneers, bonding, and smile makeovers — enhancing aesthetics for a beautiful, confident smile.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section id="why">
+  <div class="why-inner">
+    <div class="centered fade-up">
+      <span class="section-tag">Why Choose Us</span>
+      <h2 class="section-title" style="color:#fff">Reasons Patients Trust Us</h2>
+      <div class="divider center"></div>
+      <p class="section-desc" style="color:rgba(255,255,255,.65)">We are committed to providing exceptional dental care that is professional, comfortable, and accessible to every patient.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card fade-up">
+        <div class="why-card-num">01</div>
+        <span class="why-card-icon">🏆</span>
+        <h3>Specialised Orthodontic Care</h3>
+        <p>Dedicated orthodontic expertise with proven outcomes for children, teenagers, and adults seeking straighter, healthier teeth.</p>
+      </div>
+      <div class="why-card fade-up">
+        <div class="why-card-num">02</div>
+        <span class="why-card-icon">🔩</span>
+        <h3>Implant Expertise</h3>
+        <p>Highly trained implant specialists using premium implant systems for durable, natural-looking tooth replacements.</p>
+      </div>
+      <div class="why-card fade-up">
+        <div class="why-card-num">03</div>
+        <span class="why-card-icon">⚙️</span>
+        <h3>Advanced Equipment</h3>
+        <p>Equipped with digital X-rays, modern sterilisation systems, and the latest dental technology for precise, safe treatments.</p>
+      </div>
+      <div class="why-card fade-up">
+        <div class="why-card-num">04</div>
+        <span class="why-card-icon">💰</span>
+        <h3>Affordable Treatment</h3>
+        <p>Transparent pricing, easy EMI options, and quality care that fits your budget — without compromising on standards.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="testi-inner">
+    <div class="centered fade-up">
+      <span class="section-tag">Patient Reviews</span>
+      <h2 class="section-title">What Our Patients Say</h2>
+      <div class="divider center"></div>
+      <p class="section-desc">Real experiences from our patients in Badarpur and nearby areas of New Delhi.</p>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card fade-up">
+        <div class="testi-stars">★★★★★</div>
+        <p>Got my dental implants done at Dev Dental Clinic and the results are amazing. The doctor explained everything in detail, the procedure was smooth, and the healing was quick. Highly recommend for implants in Badarpur!</p>
+        <div class="testi-author">
+          <div class="testi-avatar">R</div>
+          <div><h4>Rahul Sharma</h4><p>Dental Implant Patient · Badarpur</p></div>
+        </div>
+      </div>
+      <div class="testi-card fade-up">
+        <div class="testi-stars">★★★★★</div>
+        <p>My daughter's braces treatment has been going on for 8 months now, and we are very satisfied. The doctor is extremely gentle with kids and the clinic is very clean and modern. Best orthodontist in the area!</p>
+        <div class="testi-author">
+          <div class="testi-avatar">P</div>
+          <div><h4>Priya Mehta</h4><p>Braces / Orthodontics · Faridabad</p></div>
+        </div>
+      </div>
+      <div class="testi-card fade-up">
+        <div class="testi-stars">★★★★★</div>
+        <p>I was terrified of root canals but the team at Dev Dental made it completely painless. The doctor was very calm and professional. I felt no pain at all. The clinic is well-equipped and the staff is very friendly.</p>
+        <div class="testi-author">
+          <div class="testi-avatar">A</div>
+          <div><h4>Amit Verma</h4><p>Root Canal Patient · Sarita Vihar</p></div>
+        </div>
+      </div>
+      <div class="testi-card fade-up">
+        <div class="testi-stars">★★★★★</div>
+        <p>Went for teeth whitening and smile makeover — the transformation is absolutely wonderful. The doctor understood exactly what I wanted. Very affordable compared to other clinics in Delhi. Will definitely come back!</p>
+        <div class="testi-author">
+          <div class="testi-avatar">S</div>
+          <div><h4>Sunita Gupta</h4><p>Cosmetic Dentistry · Badarpur</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- APPOINTMENT -->
+<section id="appointment">
+  <div class="appt-inner">
+    <div class="appt-form-wrap fade-up">
+      <h3>Book an Appointment</h3>
+      <p>Fill in the form below and we'll confirm your appointment shortly.</p>
+      <div class="form-group">
+        <label>Full Name *</label>
+        <input type="text" id="f-name" placeholder="Your full name" required>
+      </div>
+      <div class="form-group">
+        <label>Phone Number *</label>
+        <input type="tel" id="f-phone" placeholder="+91 XXXXX XXXXX" required>
+      </div>
+      <div class="form-group">
+        <label>Treatment Required</label>
+        <select id="f-treatment">
+          <option value="">Select a treatment</option>
+          <option>Teeth Cleaning</option>
+          <option>Root Canal Treatment</option>
+          <option>Dental Implants</option>
+          <option>Braces / Orthodontics</option>
+          <option>Cosmetic Dentistry</option>
+          <option>General Checkup</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Message / Additional Info</label>
+        <textarea id="f-message" placeholder="Describe your concern or preferred appointment time..."></textarea>
+      </div>
+      <button class="form-submit" onclick="submitForm()">📅 Request Appointment</button>
+      <div class="success-msg" id="successMsg">✅ Thank you! We'll contact you shortly to confirm your appointment.</div>
+      <a href="https://wa.me/919891083958?text=Hello%2C%20I%20would%20like%20to%20book%20an%20appointment%20at%20Dev%20Dental%20Clinic." class="whatsapp-btn" target="_blank">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Book via WhatsApp
+      </a>
+    </div>
+    <div class="appt-info fade-up">
+      <span class="section-tag">Get In Touch</span>
+      <h3>We're Here to Help You Smile</h3>
+      <p>Whether you need a routine checkup or complex treatment, our team at Dev Dental Clinic is ready to care for you and your family.</p>
+      <div class="info-cards">
+        <div class="info-card">
+          <span class="info-card-icon">📍</span>
+          <div><h4>Our Location</h4><p>Halo 10 Main Road, Jaitapur Mod, near Ananda Dairy, Dharamveer Market, Badarpur, New Delhi – 110044</p></div>
+        </div>
+        <div class="info-card">
+          <span class="info-card-icon">📞</span>
+          <div><h4>Phone / WhatsApp</h4><p><a href="tel:+919891083958">+91 98910 83958</a></p></div>
+        </div>
+        <div class="info-card">
+          <span class="info-card-icon">🕘</span>
+          <div><h4>Clinic Timings</h4><p>Open Daily — Monday to Sunday<br>9:00 AM – 9:00 PM</p></div>
+        </div>
+        <div class="info-card">
+          <span class="info-card-icon">🗺️</span>
+          <div><h4>Areas Served</h4><p>Badarpur, Faridabad Border, Sarita Vihar, Jaitapur, Tughlakabad and nearby areas of South Delhi</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MAP -->
+<section id="location">
+  <div class="map-inner">
+    <div class="centered fade-up">
+      <span class="section-tag">Find Us</span>
+      <h2 class="section-title">Our Location</h2>
+      <div class="divider center"></div>
+      <p class="section-desc">Conveniently located at Jaitapur Mod, Badarpur, New Delhi — easy to reach by metro, bus, and road.</p>
+    </div>
+    <div class="map-container fade-up">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3507.948!2d77.307282!3d28.500523!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce1dab7c22d73%3A0x0!2sJaitapur+Mod%2C+Badarpur%2C+New+Delhi%2C+Delhi+110044!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+        title="Dev Dental Clinic Location – Badarpur, New Delhi">
+      </iframe>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="centered fade-up">
+      <span class="section-tag">Contact Us</span>
+      <h2 class="section-title">Get In Touch</h2>
+      <div class="divider center"></div>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-card fade-up">
+        <span class="contact-card-icon">📞</span>
+        <h3>Call / WhatsApp</h3>
+        <p><a href="tel:+919891083958">+91 98910 83958</a></p>
+        <p style="margin-top:8px;font-size:12px;">Available Daily<br>9:00 AM – 9:00 PM</p>
+      </div>
+      <div class="contact-card fade-up">
+        <span class="contact-card-icon">📍</span>
+        <h3>Address</h3>
+        <p>Halo 10 Main Road, Jaitapur Mod,<br>near Ananda Dairy, Dharamveer Market,<br>Badarpur, New Delhi – 110044</p>
+      </div>
+      <div class="contact-card fade-up">
+        <span class="contact-card-icon">🕘</span>
+        <h3>Clinic Timings</h3>
+        <p><strong>Open Daily</strong><br>Monday – Sunday<br>9:00 AM – 9:00 PM</p>
+      </div>
+      <div class="contact-card fade-up">
+        <span class="contact-card-icon">🗺️</span>
+        <h3>Areas Served</h3>
+        <p>Badarpur · Faridabad Border<br>Sarita Vihar · Jaitapur<br>Tughlakabad & South Delhi</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p><strong>Dev Dental Clinic</strong> — Orthodontic Centre & Implant Services</p>
+  <p>Halo 10 Main Road, Jaitapur Mod, Badarpur, New Delhi – 110044 &nbsp;|&nbsp; <a href="tel:+919891083958" style="color:#a8d4f5;text-decoration:none;">+91 98910 83958</a></p>
+  <p>Open Daily: 9:00 AM – 9:00 PM</p>
+  <div class="footer-demo">⚠️ Demo Website – Created by Haarish &nbsp;|&nbsp; Demo Preview – Not Official Website</div>
+</footer>
+
+<!-- FLOATING WHATSAPP -->
+<a href="https://wa.me/919891083958?text=Hello%2C%20I%20would%20like%20to%20book%20an%20appointment." class="float-wa" target="_blank" title="Chat on WhatsApp">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script>
+  // Sticky nav shadow
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 20);
+  });
+
+  // Mobile menu
+  function toggleMenu(){
+    document.getElementById('mobileMenu').classList.toggle('open');
+  }
+
+  // Fade-up on scroll
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // Form submit
+  function submitForm(){
+    const name = document.getElementById('f-name').value.trim();
+    const phone = document.getElementById('f-phone').value.trim();
+    if(!name || !phone){ alert('Please enter your name and phone number.'); return; }
+    document.getElementById('successMsg').style.display = 'block';
+    document.getElementById('f-name').value = '';
+    document.getElementById('f-phone').value = '';
+    document.getElementById('f-message').value = '';
+    document.getElementById('f-treatment').selectedIndex = 0;
+    setTimeout(() => document.getElementById('successMsg').style.display = 'none', 5000);
+  }
+</script>
+</body>
+</html>
